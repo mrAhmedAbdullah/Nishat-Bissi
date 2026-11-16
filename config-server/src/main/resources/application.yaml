@@ -1,0 +1,22 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/mrAhmedAbdullah/bissi-config.git
+          default-label: main
+          clone-on-start: true
+          # Agar config-repo PRIVATE hai toh neeche ke 2 lines uncomment karke GitHub PAT dalo:
+          # username: <your-github-username>
+          # password: ${CONFIG_REPO_TOKEN}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
