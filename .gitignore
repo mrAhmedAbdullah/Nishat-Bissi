@@ -1,0 +1,34 @@
+# Java
+target/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# Node
+node_modules/
+build/
+dist/
+
+# IDE
+.idea/
+.metadata/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env & Secrets
+.env
+.env.local
+*.env
+secrets/
+
+# Docker
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
