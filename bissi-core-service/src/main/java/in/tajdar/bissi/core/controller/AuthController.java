@@ -12,11 +12,13 @@ import in.tajdar.bissi.core.dto.request.LoginRequest;
 import in.tajdar.bissi.core.dto.request.RegisterRequest;
 import in.tajdar.bissi.core.service.AuthService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+
 public class AuthController {
 
 	    private final AuthService authService;
