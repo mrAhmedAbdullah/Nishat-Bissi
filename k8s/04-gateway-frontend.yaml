@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: api-gateway
+          image: bissi/api-gateway:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_CONFIG_IMPORT
+              value: "optional:configserver:http://config-server:8888"
+            - name: CORE_SERVICE_URL
+              value: "http://bissi-core-service:8081"
+            - name: AUDIT_SERVICE_URL
+              value: "http://bissi-audit-service:8082"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+spec:
+  type: NodePort
+  selector:
+    app: api-gateway
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: 30088
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bissi-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bissi-frontend
+  template:
+    metadata:
+      labels:
+        app: bissi-frontend
+    spec:
+      containers:
+        - name: bissi-frontend
+          image: bissi/frontend:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bissi-frontend
+spec:
+  type: NodePort
+  selector:
+    app: bissi-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
