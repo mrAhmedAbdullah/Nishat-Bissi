@@ -30,7 +30,7 @@ spec:
             - name: POSTGRES_USER
               value: "postgres"
             - name: POSTGRES_PASSWORD
-              value: "password"
+              value: "tajdar786"
           volumeMounts:
             - name: init-db
               mountPath: /docker-entrypoint-initdb.d
