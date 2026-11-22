@@ -20,11 +20,13 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_CONFIG_IMPORT
-              value: "optional:configserver:http://config-server:8888"
+              value: "configserver:http://config-server:8888"
             - name: CORE_SERVICE_URL
               value: "http://bissi-core-service:8081"
             - name: AUDIT_SERVICE_URL
               value: "http://bissi-audit-service:8082"
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Xms192m -Xmx320m"
 ---
 apiVersion: v1
 kind: Service
